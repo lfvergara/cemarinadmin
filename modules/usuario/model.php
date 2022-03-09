@@ -9,7 +9,6 @@ class Usuario extends StandardObject {
 		$this->usuario_id = 0;
 		$this->denominacion = '';
 		$this->nivel = 0;
-		$this->equipo = 0;
 		$this->actualiza_contrasena = 0;
 		$this->usuariodetalle = $detalle;
 		$this->configuracionmenu = $configuracionmenu;
