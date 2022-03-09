@@ -41,11 +41,11 @@ class SessionBaseHandler {
 
                 switch ($configuracionmenu_id) {
                     case 5:
-                        $redirect = URL_APP . "/reporte/vdr_panel";
+                        $redirect = URL_APP . "/usuario/perfil";
                         break;
                     default:
                         // $redirect = URL_APP . "/reporte/panel";
-                        $redirect = ($um->nivel < 3) ? URL_APP . "/reporte/home" : URL_APP . "/reporte/panel";
+                        $redirect = ($um->nivel < 3) ? URL_APP . "/usuario/perfil" : URL_APP . "/usuario/perfil";
                         break;
                 }
             }
