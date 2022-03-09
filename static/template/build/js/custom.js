@@ -106,15 +106,9 @@ $MENU_TOGGLE.on('click', function() {
 		if ($BODY.hasClass('nav-md')) {
 			$SIDEBAR_MENU.find('li.active ul').hide();
 			$SIDEBAR_MENU.find('li.active').addClass('active-sm').removeClass('active');
-			
-			$SIDEBAR_MENU.find('a').css('font-size', '8px');
-			$SIDEBAR_MENU.find('a').css('padding-left', '1px');
-
 		} else {
 			$SIDEBAR_MENU.find('li.active-sm ul').show();
 			$SIDEBAR_MENU.find('li.active-sm').addClass('active').removeClass('active-sm');
-			$SIDEBAR_MENU.find('a').css('font-size', '12px');
-			$SIDEBAR_MENU.find('a').css('padding-left', '6%');
 		}
 
 	$BODY.toggleClass('nav-md nav-sm');
@@ -136,7 +130,6 @@ $MENU_TOGGLE.on('click', function() {
 	// recompute content when resizing
 	$(window).smartresize(function(){  
 		setContentHeight();
-		
 	});
 
 	setContentHeight();
@@ -2661,7 +2654,7 @@ if (typeof NProgress != 'undefined') {
 				});
 
 				$MENU_TOGGLE.on('click', function() {
-				  	$(window).resize();
+				  $(window).resize();
 				});
 			
 			}
