@@ -1,76 +1,52 @@
-    <?php
+<?php
 require_once 'core/helpers/user.php';
 require_once 'modules/usuario/model.php';
-require_once 'modules/equipo/model.php';
 require_once 'modules/configuracionmenu/model.php';
 
 
 class SessionBaseHandler {
-    function checkin() {  
+    function checkin() {
         $user = hash(ALGORITMO_USER, $_POST['usuario']);
         $clave = hash(ALGORITMO_PASS, $_POST['contrasena']);
         $hash = hash(ALGORITMO_FINAL, $user . $clave);
         $usuariodetalle_id = User::get_usuariodetalle_id($hash);
-        
+
         if ($usuariodetalle_id != 0) {
             $usuario_id = User::get_usuario_id($usuariodetalle_id);
             if ($usuario_id != 0) {
                 $um = new Usuario();
                 $um->usuario_id = $usuario_id;
                 $um->get();
-                if ($um->equipo == 0) {
-                    $nivel_denominacion = ($um->nivel == 1) ? "Equipo" : "";
-                    $nivel_denominacion = ($um->nivel == 3) ? "Admin" : $nivel_denominacion;
-                    $nivel_denominacion = ($um->nivel == 9) ? "Desa" : $nivel_denominacion;
-                    $data_login = array(
-                        "usuario-usuario_id"=>$um->usuario_id,
-                        "usuario-denominacion"=>$um->denominacion,
-                        "usuario-nivel"=>$um->nivel,
-                        "usuario-actualiza_contrasena"=>$um->actualiza_contrasena,
-                        "nivel-denominacion"=>$nivel_denominacion,
-                        "usuariodetalle-nombre"=>$um->usuariodetalle->nombre,
-                        "usuariodetalle-apellido"=>$um->usuariodetalle->apellido,
-                        "usuariodetalle-correoelectronico"=>$um->usuariodetalle->correoelectronico,
-                        "nav_home-url"=>'/usuario/admin',
-                        "usuario-configuracionmenu"=>$um->configuracionmenu->configuracionmenu_id);
-                    
-                    $_SESSION["data-login-" . APP_ABREV] = $data_login;
-                    $_SESSION['login' . APP_ABREV] = true;
-                    if ($um->actualiza_contrasena == 1) {
-                        $redirect = URL_APP . "/usuario/perfil";
-                    } else {
-                        $redirect = URL_APP . "/usuario/admin";
-                    }
-                } else {
-                    $nivel_denominacion = "Equipo";
-                    $equipo_id = User::get_equipo_id($usuario_id);
+                $configuracionmenu_id = $um->configuracionmenu->configuracionmenu_id;
+                $configuracionmenu_denominacion = $um->configuracionmenu->denominacion;
 
-                    $em = new Equipo();
-                    $em->equipo_id = $equipo_id;
-                    $em->get();
+                $nivel_denominacion = ($um->nivel == 1) ? "Operador" : "";
+                $nivel_denominacion = ($um->nivel == 2) ? "Analista" : $nivel_denominacion;
+                $nivel_denominacion = ($um->nivel == 3) ? "Administrador" : $nivel_denominacion;
+                $nivel_denominacion = ($um->nivel == 9) ? "Desarrollador" : $nivel_denominacion;
+                $data_login = array(
+                    "usuario-usuario_id"=>$um->usuario_id,
+                    "usuario-denominacion"=>$um->denominacion,
+                    "almacen-almacen_id"=>$um->almacen->almacen_id,
+                    "usuario-nivel"=>$um->nivel,
+                    "nivel-denominacion"=>$nivel_denominacion,
+                    "configuracionmenu-denominacion"=>$configuracionmenu_denominacion,
+                    "usuariodetalle-nombre"=>$um->usuariodetalle->nombre,
+                    "usuariodetalle-apellido"=>$um->usuariodetalle->apellido,
+                    "usuariodetalle-correoelectronico"=>$um->usuariodetalle->correoelectronico,
+                    "usuario-configuracionmenu"=>$um->configuracionmenu->configuracionmenu_id);
 
-                    $data_login = array(
-                        "usuario-usuario_id"=>$um->usuario_id,
-                        "usuario-denominacion"=>$um->denominacion,
-                        "usuario-nivel"=>$um->nivel,
-                        "usuario-actualiza_contrasena"=>$um->actualiza_contrasena,
-                        "nivel-denominacion"=>$nivel_denominacion,
-                        "equipo-equipo_id"=>$em->equipo_id,
-                        "equipo-denominacion"=>$em->denominacion,
-                        "equipo-zona"=>$em->zona,
-                        "usuariodetalle-nombre"=>$um->usuariodetalle->nombre,
-                        "usuariodetalle-apellido"=>$um->usuariodetalle->apellido,
-                        "usuariodetalle-correoelectronico"=>$um->usuariodetalle->correoelectronico,
-                        "nav_home-url"=>'/competencia/home',
-                        "usuario-configuracionmenu"=>$um->configuracionmenu->configuracionmenu_id);
-                    
-                    $_SESSION["data-login-" . APP_ABREV] = $data_login;
-                    $_SESSION['login' . APP_ABREV] = true;
-                    if ($um->actualiza_contrasena == 1) {
-                        $redirect = URL_APP . "/usuario/perfil";
-                    } else {
-                        $redirect = URL_APP . "/competencia/home";
-                    }
+                $_SESSION["data-login-" . APP_ABREV] = $data_login;
+                $_SESSION['login' . APP_ABREV] = true;
+
+                switch ($configuracionmenu_id) {
+                    case 5:
+                        $redirect = URL_APP . "/reporte/vdr_panel";
+                        break;
+                    default:
+                        // $redirect = URL_APP . "/reporte/panel";
+                        $redirect = ($um->nivel < 3) ? URL_APP . "/reporte/home" : URL_APP . "/reporte/panel";
+                        break;
                 }
             }
         } else {
@@ -84,14 +60,6 @@ class SessionBaseHandler {
     function check_session() {
         if($_SESSION['login' . APP_ABREV] !== true) {
             $this->checkout();
-        }
-    }
-
-    function check_actualiza_contrasena() {
-        $actualiza_contrasena = $_SESSION["data-login-" . APP_ABREV]["usuario-actualiza_contrasena"];
-        if ($actualiza_contrasena == 1) {
-            $redirect = URL_APP . "/usuario/perfil";
-            header("Location: $redirect");
         }
     }
 
@@ -115,38 +83,19 @@ class SessionBaseHandler {
     }
 
     function check_admin_level() {
-        $level = $_SESSION["data-login-" . APP_ABREV]["usuario-nivel"]; 
-        if ($level != 9) {
-            $this->checkout();
+        $level = $_SESSION["data-login-" . APP_ABREV]["usuario-nivel"];
+        $temp_admin_id = array(3,9);
+        if (!in_array($level, $temp_admin_id)) {
+            header("location:" . URL_APP . "/usuario/perfil");
         }
     }
 
     function check_level() {
-        $level = $_SESSION["data-login-" . APP_ABREV]["usuario-nivel"]; 
+        $level = $_SESSION["data-login-" . APP_ABREV]["usuario-nivel"];
         if ($level > 1 ) {
             $_SESSION['login' . APP_ABREV] = true;
         } else {
             $this->checkout();
-        }
-    }
-
-    function checkPerfil($usr_niveles) {
-        $session_usr_nivel = $_SESSION["data-login-" . APP_ABREV]['usuario-nivel'];
-        $niveles = explode(',', $usr_niveles);
-        if ($session_usr_nivel == 1) {
-             $this->checkout();
-        } else {
-          if(in_array(0, $niveles)) return false;
-          
-          if(3 == $session_usr_nivel || 9 == $session_usr_nivel) {
-            return false;
-          } else {
-            if(in_array($session_usr_nivel, $niveles)) {
-              return false;
-            } else {
-               $this->checkout();
-            }
-          }
         }
     }
 
@@ -155,7 +104,7 @@ class SessionBaseHandler {
         if (ini_get("session.use_cookies")) {
             $params = session_get_cookie_params();
             setcookie(session_name(), '', time() - 42000,
-                $params["path"], $params["domain"], 
+                $params["path"], $params["domain"],
                 $params["secure"], $params["httponly"]
             );
         }
