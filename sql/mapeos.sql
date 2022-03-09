@@ -134,8 +134,8 @@ CREATE TABLE IF NOT EXISTS configuracion (
 /* PARA OBJETOS DE CASOS DE USO 
 /* ****************************************************************************************** */
 
-CREATE TABLE IF NOT EXISTS categoriainvestigador (
-    categoriainvestigador_id INT(11) NOT NULL 
+CREATE TABLE IF NOT EXISTS investigadorcategoria (
+    investigadorcategoria_id INT(11) NOT NULL 
         AUTO_INCREMENT PRIMARY KEY
     , denominacion VARCHAR(150)
 ) ENGINE=InnoDb;
