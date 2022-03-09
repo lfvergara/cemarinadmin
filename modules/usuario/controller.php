@@ -168,6 +168,7 @@ class UsuarioController {
 
 	function perfil() {
 		SessionHandler()->check_session();
+		print_r($_SESSION);exit;
 		$this->view->perfil();
 	}
 
