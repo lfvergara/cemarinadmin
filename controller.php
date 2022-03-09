@@ -1,14 +1,14 @@
 <?php
 //error_reporting(0);
 /**
-* Austral
+* Gestion CEMarin
 *
 * FrontCrontoller de la Aplicación.
 * Rutea las peticiones del cliente teniendo en cuenta la estructura
 * /MODULO/RECURSO/ARGUMENTO
 *
-* @package    Austral
-* @version    2.0.1
+* @package   Gestion  CEMarin
+* @version   1.0.1
 **/
 
 header('Content-Type: text/html; charset=utf8');
@@ -19,12 +19,13 @@ require_once 'core/collector_condition.php';
 require_once 'core/view.php';
 require_once 'core/standardobject.php';
 require_once 'core/sessions.php';
-require_once "core/helpers/configuracionmenu.php";
-require_once "tools/email.php";
+require_once 'core/helpers/configuracionmenu.php';
+require_once 'tools/email.php';
 //if (AMBIENTE == 'desa') error_reporting(0);
 
 
 $peticion = $_SERVER['REQUEST_URI'];
+print_r($peticion);exit;
 if (SO_UNIX == true) {
 	@list($app, $modulo, $recurso, $argumento) = explode('/', $peticion);
 } else {
