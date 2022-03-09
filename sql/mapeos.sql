@@ -162,12 +162,14 @@ CREATE TABLE IF NOT EXISTS lineainvestigacion (
     lineainvestigacion_id INT(11) NOT NULL 
         AUTO_INCREMENT PRIMARY KEY
     , denominacion VARCHAR(150)
+    , traduccion VARCHAR(150)
 ) ENGINE=InnoDb;
 
 CREATE TABLE IF NOT EXISTS sublineainvestigacion (
     sublineainvestigacion_id INT(11) NOT NULL 
         AUTO_INCREMENT PRIMARY KEY
     , denominacion VARCHAR(150)
+    , traduccion VARCHAR(150)
 ) ENGINE=InnoDb;
 
 CREATE TABLE IF NOT EXISTS grupoinvestigacion (
