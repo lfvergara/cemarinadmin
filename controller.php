@@ -25,7 +25,6 @@ require_once 'tools/email.php';
 
 
 $peticion = $_SERVER['REQUEST_URI'];
-print_r($peticion);exit;
 if (SO_UNIX == true) {
 	@list($app, $modulo, $recurso, $argumento) = explode('/', $peticion);
 } else {
