@@ -3,7 +3,7 @@
 
 class InvestigadorView extends View {
 
-	function agregar($investigadorcategoria_collection, $lineainvestigacion_collection, $sublineainvestigacion_collection, $universidad_collection, $universidadfacultad_collection, $universidadarea_collection) {
+	function agregar($investigadorcategoria_collection, $lineainvestigacion_collection, $sublineainvestigacion_collection, $grupoinvestigacion_collection, $universidad_collection, $universidadfacultad_collection, $universidadarea_collection) {
 		$gui = file_get_contents("static/modules/investigador/agregar.html");
 		$gui_slt_investigadorcategoria = file_get_contents("static/common/slt_investigadorcategoria.html");
 		$gui_slt_investigadorcategoria = $this->render_regex('SLT_INVESTIGADORCATEGORIA', $gui_slt_investigadorcategoria, $investigadorcategoria_collection);
