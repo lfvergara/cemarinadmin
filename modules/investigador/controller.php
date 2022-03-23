@@ -27,7 +27,6 @@ class InvestigadorController {
 		$universidad_collection = Collector()->get('Universidad');
 		$universidadfacultad_collection = Collector()->get('UniversidadFacultad');
 		$universidadarea_collection = Collector()->get('UniversidadArea');
-		print_r($universidadarea_collection);exit;
 		$this->view->agregar($investigadorcategoria_collection, $lineainvestigacion_collection, $sublineainvestigacion_collection, $grupoinvestigacion_collection, $universidad_collection, $universidadfacultad_collection, $universidadarea_collection);
 	}
 
