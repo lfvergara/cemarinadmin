@@ -13,7 +13,7 @@ require_once "modules/universidadarea/model.php";
 class InvestigadorController {
 
 	function __construct() {
-		//$this->model = new Investigador();
+		$this->model = new Investigador();
 		$this->view = new InvestigadorView();
 	}
 
