@@ -1,0 +1,106 @@
+<div class="col-lg-12">
+    <ul class="breadcrumb">
+        <li><a href="{url_app}/reporte/{panel_general}"><i class="fa fa-home"></i> HOME</a></li>
+    </ul>
+</div>
+<div class="col-md-12 col-sm-12 col-xs-12">
+    <div class="x_panel">
+        <div class="x_title">
+            <h2><i class="fa fa-plus-square"></i>&nbsp;&nbsp; Agregar investigador</h2>
+            <ul class="nav navbar-right panel_toolbox">
+                <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a></li>
+                <li><a class="close-link"><i class="fa fa-close"></i></a></li>
+            </ul>
+            <div class="clearfix"></div>
+        </div>
+        <div class="x_content">
+            <div class=" form">
+                <form class="form" id="formulario_guardar" method="post" action="{url_app}/investigadorcategoria/guardar">
+                    <div class="form-group col-lg-8">
+                        <label>Investigador</label>
+                        <input type="text" class="form-control" id="nombre" name="nombre" required>
+                    </div>
+                    <div class="form-group col-lg-4">
+                        <label>Categoría</label>
+                        <select class="form-control m-bot15" name="categoria" id="categoria" required>
+                            {slt_categoria}
+                        </select>
+                    </div>
+                    <div class="form-group col-lg-4">
+                        <label>Ciudad Residencia</label>
+                        <input type="text" class="form-control" id="ciudad_residencia" name="ciudad_residencia" required>
+                    </div>
+                    <div class="form-group col-lg-4">
+                        <label>Dirección</label>
+                        <input type="text" class="form-control" id="direccion" name="direccion" required>
+                    </div>
+                    <div class="form-group col-lg-4">
+                        <label>Teléfono</label>
+                        <input type="text" class="form-control" id="telefono" name="telefono" required>
+                    </div>
+                    <div class="form-group col-lg-3">
+                        <label>Email</label>
+                        <input type="text" class="form-control" id="correoelectronico" name="correoelectronico" required>
+                    </div>
+                    <div class="form-group col-lg-3">
+                        <label>URL</label>
+                        <input type="text" class="form-control" id="url_web" name="url_web" required>
+                    </div>
+                    <div class="form-group col-lg-3">
+                        <label>CV Inglés</label>
+                        <select class="form-control m-bot15" name="cv_ingles" id="cv_ingles" required>
+                            <option value="1" selected>SI</option>
+                            <option value="0">NO</option>
+                        </select>
+                    </div>
+                    <div class="form-group col-lg-3">
+                        <label>Autoriza Trat. Datos</label>
+                        <select class="form-control m-bot15" name="tratamiento_datos" id="tratamiento_datos" required>
+                            <option value="1" selected>SI</option>
+                            <option value="0">NO</option>
+                        </select>
+                    </div>
+                    <div class="form-group col-lg-4">
+                        <label>Línea de Investigación</label>
+                        <select class="form-control m-bot15" name="lineainvestigacion" id="lineainvestigacion" required>
+                            {slt_lineainvestigacion}
+                        </select>
+                    </div>
+                    <div class="form-group col-lg-4">
+                        <label>SubLínea de Investigación</label>
+                        <select class="form-control m-bot15" name="sublineainvestigacion" id="sublineainvestigacion" required>
+                            {slt_sublineainvestigacion}
+                        </select>
+                    </div>
+                    <div class="form-group col-lg-4">
+                        <label>Grupo de Investigación</label>
+                        <select class="form-control m-bot15" name="grupoinvestigacion" id="grupoinvestigacion" required>
+                            {slt_grupoinvestigacion}
+                        </select>
+                    </div>
+                    <div class="form-group col-lg-4">
+                        <label>Universidad</label>
+                        <select class="form-control m-bot15" name="universidad" id="universidad" required>
+                            {slt_universidad}
+                        </select>
+                    </div>
+                    <div class="form-group col-lg-4">
+                        <label>Facultad</label>
+                        <select class="form-control m-bot15" name="facultad" id="facultad" required>
+                            {slt_facultad}
+                        </select>
+                    </div>
+                    <div class="form-group col-lg-4">
+                        <label>Área</label>
+                        <select class="form-control m-bot15" name="area" id="area" required>
+                            {slt_area}
+                        </select>
+                    </div>
+                    <div class="col-lg-12" style="margin-top: 2%;" align="right">
+                        <a href="#" class="btn btn-app" onclick="confirma_formulario(1, '')"> <i class="fa fa-save"></i> Agregar </a>
+                    </div>
+                </form>
+            </div>            
+        </div>
+    </div>
+</div>
