@@ -15,7 +15,7 @@
         </div>
         <div class="x_content">
             <div class=" form">
-                <form class="form" id="formulario_guardar" method="post" action="{url_app}/investigadorcategoria/guardar">
+                <form class="form" id="formulario_guardar" method="post" action="{url_app}/investigador/guardar">
                     <div class="form-group col-lg-8">
                         <label>Investigador</label>
                         <input type="text" class="form-control" id="nombre" name="nombre" required>
@@ -23,7 +23,7 @@
                     <div class="form-group col-lg-4">
                         <label>Categoría</label>
                         <select class="form-control m-bot15" name="categoria" id="categoria" required>
-                            {slt_categoria}
+                            {slt_investigadorcategoria}
                         </select>
                     </div>
                     <div class="form-group col-lg-4">
@@ -87,13 +87,13 @@
                     <div class="form-group col-lg-4">
                         <label>Facultad</label>
                         <select class="form-control m-bot15" name="facultad" id="facultad" required>
-                            {slt_facultad}
+                            {slt_universidadfacultad}
                         </select>
                     </div>
                     <div class="form-group col-lg-4">
                         <label>Área</label>
                         <select class="form-control m-bot15" name="area" id="area" required>
-                            {slt_area}
+                            {slt_universidadarea}
                         </select>
                     </div>
                     <div class="col-lg-12" style="margin-top: 2%;" align="right">
