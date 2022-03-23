@@ -178,7 +178,56 @@ CREATE TABLE IF NOT EXISTS grupoinvestigacion (
     , denominacion VARCHAR(150)
 ) ENGINE=InnoDb;
 
-
+CREATE TABLE IF NOT EXISTS investigador (
+    investigador_id INT(11) NOT NULL 
+        AUTO_INCREMENT PRIMARY KEY
+    , fecha DATE
+    , nombre TEXT
+    , ciudad_residencia TEXT
+    , direccion TEXT
+    , telefono VARCHAR(50)
+    , correoelectronico VARCHAR(50)
+    , url_web TEXT
+    , cv_ingles VARCHAR(2)
+    , autoriza_tratamiento_datos VARCHAR(2)
+    , intereses TEXT
+    , observacion TEXT
+    , investigadorcategoria INT(11)
+    , INDEX (investigadorcategoria)
+    , FOREIGN KEY (investigadorcategoria)
+        REFERENCES investigadorcategoria (investigadorcategoria_id)
+        ON DELETE SET NULL
+    , lineainvestigacion INT(11)
+    , INDEX (lineainvestigacion)
+    , FOREIGN KEY (lineainvestigacion)
+        REFERENCES lineainvestigacion (lineainvestigacion_id)
+        ON DELETE SET NULL
+    , sublineainvestigacion INT(11)
+    , INDEX (sublineainvestigacion)
+    , FOREIGN KEY (sublineainvestigacion)
+        REFERENCES sublineainvestigacion (sublineainvestigacion_id)
+        ON DELETE SET NULL
+    , grupoinvestigacion INT(11)
+    , INDEX (grupoinvestigacion)
+    , FOREIGN KEY (grupoinvestigacion)
+        REFERENCES grupoinvestigacion (grupoinvestigacion_id)
+        ON DELETE SET NULL
+    , universidad INT(11)
+    , INDEX (universidad)
+    , FOREIGN KEY (universidad)
+        REFERENCES universidad (universidad_id)
+        ON DELETE CASCADE
+    , universidadfacultad INT(11)
+    , INDEX (universidadfacultad)
+    , FOREIGN KEY (universidadfacultad)
+        REFERENCES universidadfacultad (universidadfacultad_id)
+        ON DELETE CASCADE
+    , universidadarea INT(11)
+    , INDEX (universidadarea)
+    , FOREIGN KEY (universidadarea)
+        REFERENCES universidadarea (universidadarea_id)
+        ON DELETE CASCADE
+) ENGINE=InnoDb;
 
 
 
@@ -213,29 +262,7 @@ CREATE TABLE IF NOT EXISTS infocontacto (
     , valor TEXT
 ) ENGINE=InnoDb;
 
-CREATE TABLE IF NOT EXISTS cliente (
-    cliente_id INT(11) NOT NULL 
-        AUTO_INCREMENT PRIMARY KEY
-    , apellido TEXT
-    , nombre TEXT
-    , documento BIGINT(20)
-    , domicilio TEXT
-    , codigopostal VARCHAR(50)
-    , barrio TEXT
-    , latitud TEXT
-    , longitud TEXT
-    , observacion TEXT
-    , provincia INT(11)
-    , INDEX (provincia)
-    , FOREIGN KEY (provincia)
-        REFERENCES provincia (provincia_id)
-        ON DELETE CASCADE
-    , documentotipo INT(11)
-    , INDEX (documentotipo)
-    , FOREIGN KEY (documentotipo)
-        REFERENCES documentotipo (documentotipo_id)
-        ON DELETE CASCADE
-) ENGINE=InnoDb;
+
 
 CREATE TABLE IF NOT EXISTS infocontactocliente (
     infocontactocliente_id INT(11) NOT NULL 
