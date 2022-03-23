@@ -7,6 +7,7 @@ class InvestigadorView extends View {
 		$gui = file_get_contents("static/modules/investigador/agregar.html");
 		$gui_slt_investigadorcategoria = file_get_contents("static/common/slt_investigadorcategoria.html");
 		$gui_slt_investigadorcategoria = $this->render_regex('SLT_INVESTIGADORCATEGORIA', $gui_slt_investigadorcategoria, $investigadorcategoria_collection);
+		print_r($gui_slt_investigadorcategoria);exit;
 		$gui_slt_lineainvestigacion = file_get_contents("static/common/slt_lineainvestigacion.html");
 		$gui_slt_lineainvestigacion = $this->render_regex('SLT_LINEAINVESTIGACION', $gui_slt_lineainvestigacion, $lineainvestigacion_collection);
 		$gui_slt_sublineainvestigacion = file_get_contents("static/common/slt_sublineainvestigacion.html");
