@@ -1,5 +1,5 @@
 <?php
-//require_once "modules/investigador/model.php";
+require_once "modules/investigador/model.php";
 require_once "modules/investigador/view.php";
 require_once "modules/investigadorcategoria/model.php";
 require_once "modules/lineainvestigacion/model.php";
