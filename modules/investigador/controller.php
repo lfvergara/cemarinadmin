@@ -34,6 +34,7 @@ class InvestigadorController {
 		SessionHandler()->check_session();
 		//SessionHandler()->check_admin_level();		
 		foreach ($_POST as $key=>$value) $this->model->$key = $value;
+        $this->model->fecha = date('Y-m-d');
         $this->model->save();
 		header("Location: " . URL_APP . "/investigadorcategoria/panel");
 	}
