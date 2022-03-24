@@ -81,7 +81,7 @@ class InvestigadorController {
 		$this->model->lineainvestigacion = filter_input(INPUT_POST, 'lineainvestigacion');
 		$this->model->universidad = filter_input(INPUT_POST, 'universidad');
 		$this->model->save();
-		header("Location: " . URL_APP . "/investigadorcategoria/panel");
+		header("Location: " . URL_APP . "/investigador/panel");
 	}
 }
 ?>
