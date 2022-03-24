@@ -61,10 +61,27 @@ class InvestigadorController {
 	function editar($arg) {
 		SessionHandler()->check_session();
 		//SessionHandler()->check_admin_level();
-		$this->model->investigadorcategoria_id = $arg;
+		$this->model->investigador_id = $arg;
 		$this->model->get();
 		$investigadorcategoria_collection = Collector()->get('InvestigadorCategoria');
-		$this->view->editar($investigadorcategoria_collection, $this->model);
+		$lineainvestigacion_collection = Collector()->get('LineaInvestigacion');
+		$universidad_collection = Collector()->get('Universidad');
+		$this->view->editar($investigadorcategoria_collection, $lineainvestigacion_collection, $universidad_collection, $this->model);
+	}
+
+	function actualizar() {
+		SessionHandler()->check_session();
+		//SessionHandler()->check_admin_level();
+		$investigador_id = filter_input(INPUT_POST, "investigador_id");
+		$this->model->investigador_id = $investigador_id;
+		$this->model->get();
+		$this->model->nombre = filter_input(INPUT_POST, 'nombre');
+		$this->model->url_web = filter_input(INPUT_POST, 'url_web');
+		$this->model->investigadorcategoria = filter_input(INPUT_POST, 'investigadorcategoria');
+		$this->model->lineainvestigacion = filter_input(INPUT_POST, 'lineainvestigacion');
+		$this->model->universidad = filter_input(INPUT_POST, 'universidad');
+		$this->model->save();
+		header("Location: " . URL_APP . "/investigadorcategoria/panel");
 	}
 }
 ?>
