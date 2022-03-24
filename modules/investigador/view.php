@@ -3,6 +3,16 @@
 
 class InvestigadorView extends View {
 
+	function panel($investigador_collection) {
+		$gui = file_get_contents("static/modules/investigador/panel.html");
+		$gui_slt_investigador = file_get_contents("static/common/tbl_investigador.html");
+		$gui_slt_investigador = $this->render_regex('SLT_INVESTIGADOR', $gui_slt_investigador, $investigador_collection);
+		$render = str_replace('{tbl_investigador}', $gui_tbl_investigador, $gui);
+		$render = $this->render_breadcrumb($render);
+		$template = $this->render_template($render);
+		print $template;
+	}
+
 	function agregar($investigadorcategoria_collection, $lineainvestigacion_collection, $universidad_collection) {
 		$gui = file_get_contents("static/modules/investigador/agregar.html");
 		$gui_slt_investigadorcategoria = file_get_contents("static/common/slt_investigadorcategoria.html");

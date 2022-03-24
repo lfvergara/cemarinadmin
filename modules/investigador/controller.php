@@ -17,6 +17,13 @@ class InvestigadorController {
 		$this->view = new InvestigadorView();
 	}
 
+	function panel() {
+    	SessionHandler()->check_session();
+		//SessionHandler()->check_admin_level();
+		$investigador_collection = Collector()->get('Investigador');
+		$this->view->panel($investigador_collection);
+	}
+
 	function agregar() {
     	SessionHandler()->check_session();
 		//SessionHandler()->check_admin_level();
