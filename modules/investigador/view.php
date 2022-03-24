@@ -6,7 +6,7 @@ class InvestigadorView extends View {
 	function panel($investigador_collection) {
 		$gui = file_get_contents("static/modules/investigador/panel.html");
 		$gui_tbl_investigador = file_get_contents("static/common/tbl_investigador.html");
-		$gui_tbl_investigador = $this->render_regex('TBL_INVESTIGADOR', $gui_slt_investigador, $investigador_collection);
+		$gui_tbl_investigador = $this->render_regex('TBL_INVESTIGADOR', $gui_tbl_investigador, $investigador_collection);
 		$render = str_replace('{tbl_investigador}', $gui_tbl_investigador, $gui);
 		$render = $this->render_breadcrumb($render);
 		$template = $this->render_template($render);
