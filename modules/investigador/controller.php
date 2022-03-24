@@ -22,19 +22,31 @@ class InvestigadorController {
 		//SessionHandler()->check_admin_level();
 		$investigadorcategoria_collection = Collector()->get('InvestigadorCategoria');
 		$lineainvestigacion_collection = Collector()->get('LineaInvestigacion');
-		$sublineainvestigacion_collection = Collector()->get('SubLineaInvestigacion');
-		$grupoinvestigacion_collection = Collector()->get('GrupoInvestigacion');
 		$universidad_collection = Collector()->get('Universidad');
-		$universidadfacultad_collection = Collector()->get('UniversidadFacultad');
-		$universidadarea_collection = Collector()->get('UniversidadArea');
-		$this->view->agregar($investigadorcategoria_collection, $lineainvestigacion_collection, $sublineainvestigacion_collection, $grupoinvestigacion_collection, $universidad_collection, $universidadfacultad_collection, $universidadarea_collection);
+		$this->view->agregar($investigadorcategoria_collection, $lineainvestigacion_collection, $universidad_collection);
 	}
 
 	function guardar() {
 		SessionHandler()->check_session();
-		//SessionHandler()->check_admin_level();		
-		foreach ($_POST as $key=>$value) $this->model->$key = $value;
-        $this->model->fecha = date('Y-m-d');
+		//SessionHandler()->check_admin_level();
+		$this->model->fecha = date('Y-m-d');
+		$this->model->nombre = filter_input(INPUT_POST, 'nombre');
+		$this->model->ciudad_residencia = 'N/A';
+		$this->model->direccion = 'N/A';
+		$this->model->telefono = 'N/A';
+		$this->model->correoelectronico = 'N/A';
+		$this->model->url_web = filter_input(INPUT_POST, 'url_web');
+		$this->model->cv_ingles = 'NA';
+		$this->model->autoriza_tratamiento_datos = 'NA';
+		$this->model->intereses = 'N/A';
+		$this->model->observacion = 'N/A';
+		$this->model->investigadorcategoria = filter_input(INPUT_POST, 'investigadorcategoria');
+		$this->model->lineainvestigacion = filter_input(INPUT_POST, 'lineainvestigacion');
+		$this->model->sublineainvestigacion = 62;
+		$this->model->grupoinvestigacion = 82;
+		$this->model->universidad = filter_input(INPUT_POST, 'universidad');
+		$this->model->universidadfacultad = 51;
+		$this->model->universidadarea = 11;
         $this->model->save();
 		header("Location: " . URL_APP . "/investigadorcategoria/panel");
 	}
