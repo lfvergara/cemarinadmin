@@ -46,7 +46,7 @@ abstract class View {
                       "{contenido}"=>$contenido);
 
         $plantilla = file_get_contents($theme);
-        print_r($plantilla);exit;
+        
         $plantilla = $this->render($dict, $plantilla);
         $plantilla = str_replace("{url_app}", URL_APP, $plantilla);
         $plantilla = str_replace("{url_static}", URL_STATIC, $plantilla);
