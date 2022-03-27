@@ -85,7 +85,6 @@ class InvestigadorController {
 	}
 
 	function buscar() {
-		SessionHandler()->check_session();
 		$lineainvestigacion_collection = Collector()->get('LineaInvestigacion');
 		$this->view->editar($lineainvestigacion_collection);		
 	}
