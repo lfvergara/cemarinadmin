@@ -86,7 +86,7 @@ class InvestigadorController {
 
 	function buscar() {
 		$lineainvestigacion_collection = Collector()->get('LineaInvestigacion');
-		$this->view->editar($lineainvestigacion_collection);		
+		$this->view->buscar($lineainvestigacion_collection);		
 	}
 }
 ?>
