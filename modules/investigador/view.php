@@ -55,7 +55,6 @@ class InvestigadorView extends View {
 		$gui_slt_lineainvestigacion = $this->render_regex('SLT_LINEAINVESTIGACION', $gui_slt_lineainvestigacion, $lineainvestigacion_collection);
 		
 		$render = str_replace('{slt_lineainvestigacion}', $gui_slt_lineainvestigacion, $gui);
-		print_r($render);exit;
 		$template = $this->render_template_buscador($render);
 		print $template;
 	}
