@@ -40,7 +40,7 @@ abstract class View {
     }
 
     function render_template_buscador($contenido) {
-        $theme = "../static/template_buscador.html";
+        $theme = "static/template_buscador.html";
         $dict = array("{app_nombre}"=>APP_TITTLE,
                       "{url_static}"=>URL_STATIC,
                       "{contenido}"=>$contenido);
