@@ -40,11 +40,11 @@ abstract class View {
     }
 
     function render_template_buscador($contenido) {
-        print_r($contenido);exit;
         $theme = "../static/template_buscador.html";
         $dict = array("{app_nombre}"=>APP_TITTLE,
                       "{url_static}"=>URL_STATIC,
                       "{contenido}"=>$contenido);
+        print_r($contenido);exit;
 
         $plantilla = file_get_contents($theme);
         $plantilla = $this->render($dict, $plantilla);
