@@ -44,9 +44,9 @@ abstract class View {
         $dict = array("{app_nombre}"=>APP_TITTLE,
                       "{url_static}"=>URL_STATIC,
                       "{contenido}"=>$contenido);
-        print_r($contenido);exit;
 
         $plantilla = file_get_contents($theme);
+        print_r($plantilla);exit;
         $plantilla = $this->render($dict, $plantilla);
         $plantilla = str_replace("{url_app}", URL_APP, $plantilla);
         $plantilla = str_replace("{url_static}", URL_STATIC, $plantilla);
