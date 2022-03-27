@@ -1,11 +1,13 @@
-<form class="form" id="formulario_guardar" method="post" action="{url_app}/investigador/buscar">
-    <div class="form-group col-lg-4">
-        <label>Línea de Investigación</label>
-        <select class="form-control m-bot15" name="lineainvestigacion" id="lineainvestigacion" required>
-            {slt_lineainvestigacion}
-        </select>
-    </div>
-    <div class="col-lg-12" style="margin-top: 2%;" align="right">
-        <button type="submit" class="btn btn-app"> <i class="fa fa-search"></i> Buscar </button>
+<form class="form-horizontal form-label-left" method="post" action="{url_app}/investigador/buscar">
+    <div class="form-group row">
+        <label class="col-sm-3 col-form-label">Buscar investigador</label>
+        <div class="input-group">
+            <select class="form-control m-bot15" name="lineainvestigacion" id="lineainvestigacion" required>
+                {slt_lineainvestigacion}
+            </select>
+            <span class="input-group-btn">
+                <button type="button" class="btn btn-primary">Buscar!</button>
+            </span> 
+        </div>
     </div>
 </form>
