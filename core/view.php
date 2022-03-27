@@ -39,6 +39,19 @@ abstract class View {
         return $plantilla;
     }
 
+    function render_template_buscador($contenido) {
+        const TEMPLATE_BUSCADOR = "../static/template_buscador.html";
+        $dict = array("{app_nombre}"=>APP_TITTLE,
+                      "{url_static}"=>URL_STATIC,
+                      "{contenido}"=>$contenido);
+
+        $plantilla = file_get_contents(TEMPLATE_BUSCADOR);
+        $plantilla = $this->render($dict, $plantilla);
+        $plantilla = str_replace("{url_app}", URL_APP, $plantilla);
+        $plantilla = str_replace("{url_static}", URL_STATIC, $plantilla);
+        return $plantilla;
+    }
+
     function render_template_sitio($contenido) {
         $dict = array("{contenido}"=>$contenido);
         $plantilla = file_get_contents(TEMPLATE_SITIO);
