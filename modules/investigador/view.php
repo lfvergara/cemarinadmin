@@ -48,5 +48,17 @@ class InvestigadorView extends View {
 		$template = $this->render_template($render);
 		print $template;
 	}
+
+	function buscar($lineainvestigacion_collection) {
+		$gui = file_get_contents("static/modules/investigador/buscar.html");
+		$gui_slt_lineainvestigacion = file_get_contents("static/common/slt_lineainvestigacion.html");
+		$gui_slt_lineainvestigacion = $this->render_regex('SLT_LINEAINVESTIGACION', $gui_slt_lineainvestigacion, $lineainvestigacion_collection);
+		
+		$render = str_replace('{slt_lineainvestigacion}', $gui_slt_lineainvestigacion, $gui);
+		$render = $this->render_breadcrumb($render);
+		$template = $this->render_template($render);
+		print $template;
+	}
+
 }
 ?>

@@ -83,5 +83,11 @@ class InvestigadorController {
 		$this->model->save();
 		header("Location: " . URL_APP . "/investigador/panel");
 	}
+
+	function buscar() {
+		SessionHandler()->check_session();
+		$lineainvestigacion_collection = Collector()->get('LineaInvestigacion');
+		$this->view->editar($lineainvestigacion_collection);		
+	}
 }
 ?>
