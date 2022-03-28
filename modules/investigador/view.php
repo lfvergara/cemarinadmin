@@ -62,8 +62,30 @@ class InvestigadorView extends View {
 		print $template;
 	}
 
+	function search($lineainvestigacion_collection, $universidad_collection) {
+		$gui = file_get_contents("static/modules/investigador/search.html");
+		$gui_slt_lineainvestigacion = file_get_contents("static/common/slt_lineainvestigacion_english.html");
+		$gui_slt_lineainvestigacion = $this->render_regex('SLT_LINEAINVESTIGACION', $gui_slt_lineainvestigacion, $lineainvestigacion_collection);
+		$gui_slt_universidad = file_get_contents("static/common/slt_universidad.html");
+		$gui_slt_universidad = $this->render_regex('SLT_UNIVERSIDAD', $gui_slt_universidad, $universidad_collection);
+		
+		$render = str_replace('{slt_lineainvestigacion}', $gui_slt_lineainvestigacion, $gui);
+		$render = str_replace('{slt_universidad}', $gui_slt_universidad, $render);
+		$template = $this->render_template_buscador($render);
+		print $template;
+	}
+
 	function res_buscar($investigador_collection) {
 		$gui = file_get_contents("static/modules/investigador/res_buscar.html");
+		$gui_tbl_investigador = file_get_contents("static/modules/investigador/tbl_res_investigador.html");
+		$gui_tbl_investigador = $this->render_regex_dict('TBL_INVESTIGADOR', $gui_tbl_investigador, $investigador_collection);
+		$render = str_replace('{tbl_investigador}', $gui_tbl_investigador, $gui);
+		$template = $this->render_template_buscador($render);
+		print $template;
+	}
+
+	function res_search($investigador_collection) {
+		$gui = file_get_contents("static/modules/investigador/res_search.html");
 		$gui_tbl_investigador = file_get_contents("static/modules/investigador/tbl_res_investigador.html");
 		$gui_tbl_investigador = $this->render_regex_dict('TBL_INVESTIGADOR', $gui_tbl_investigador, $investigador_collection);
 		$render = str_replace('{tbl_investigador}', $gui_tbl_investigador, $gui);
