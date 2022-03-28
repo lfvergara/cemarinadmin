@@ -89,5 +89,17 @@ class InvestigadorController {
 		$universidad_collection = Collector()->get('Universidad');
 		$this->view->buscar($lineainvestigacion_collection, $universidad_collection);
 	}
+
+	function res_buscar() {
+		$lineainvestigacion = filter_input(INPUT_POST, 'lineainvestigacion');
+		$universidad = filter_input(INPUT_POST, 'universidad');
+		$nombre = filter_input(INPUT_POST, 'nombre');
+		
+		$select = "in.nombre AS INVESTIGADOR, un.denominacion AS UNIVERSIDAD, li.denominacion AS LINEA";
+		$from = "investigador in INNER JOIN universidad un ON in.universidad = un.universidad_id INNER JOIN lineainvestigacion li ON in.lineainvestigacion = li.lineainvestigacion_id";
+		$where = "in.nombre LIKE '%{$nombre}%' OR un.universidad_id = {$universidad} OR li.lineainvestigacion_id = {$lineainvestigacion}";
+		$investigadores = CollectorCondition()->get('Investigador', $where, 4, $from, $select);
+		$this->view->res_buscar($lineainvestigacion_collection, $universidad_collection);
+	}
 }
 ?>
