@@ -107,7 +107,7 @@ class InvestigadorController {
 		$this->view->res_buscar($investigadores);
 	}
 
-	function res_buscar() {
+	function res_search() {
 		$lineainvestigacion = filter_input(INPUT_POST, 'lineainvestigacion');
 		$universidad = filter_input(INPUT_POST, 'universidad');
 		$nombre = filter_input(INPUT_POST, 'nombre');
