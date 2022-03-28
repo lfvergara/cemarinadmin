@@ -94,7 +94,7 @@ class InvestigadorController {
 		$lineainvestigacion = filter_input(INPUT_POST, 'lineainvestigacion');
 		$universidad = filter_input(INPUT_POST, 'universidad');
 		$nombre = filter_input(INPUT_POST, 'nombre');
-		print_r($lineainvestigacion);exit;
+		print_r($universidad);exit;
 		$select = "i.nombre AS INVESTIGADOR, un.denominacion AS UNIVERSIDAD, li.denominacion AS LINEA";
 		$from = "investigador i INNER JOIN universidad un ON i.universidad = un.universidad_id INNER JOIN lineainvestigacion li ON i.lineainvestigacion = li.lineainvestigacion_id";
 		$where = "i.nombre LIKE '%{$nombre}%' OR un.universidad_id = {$universidad} OR li.lineainvestigacion_id = {$lineainvestigacion}";
