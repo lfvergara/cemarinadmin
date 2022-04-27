@@ -243,6 +243,5 @@ class UsuarioController {
 		print_r("Éxito!");
 		exit;
 	}
-
 }
 ?>
