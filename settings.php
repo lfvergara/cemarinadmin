@@ -5,9 +5,9 @@ const SO_UNIX = true;
 
 # Credenciales para la conexión con la base de datos MySQL
 const DB_HOST = 'localhost';
-const DB_USER = 'Corellia';
+const DB_USER = 'ptkzblmy_corellia';
 const DB_PASS = 'c3M4R1n.1630';
-const DB_NAME = 'cemarinadmin';
+const DB_NAME = 'ptkzblmy_cemarinadmin';
 
 
 # Algoritmos utilizados para la encriptación de credenciales
@@ -24,7 +24,7 @@ if (SO_UNIX == true) {
 	define('URL_STATIC', "/static/template/");
 	
 	# Directorio private del sistema
-	$url_private = "/srv/websites/cemarinadmin/private/";
+	$url_private = "/home/ptkzblmy/public_html/cemarinadmin/private/";
 	define('URL_PRIVATE', $url_private);
 	ini_set("include_path", URL_PRIVATE);
 } else {
