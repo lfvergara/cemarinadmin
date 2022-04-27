@@ -52,11 +52,11 @@ class SessionBaseHandler {
             $redirect = URL_APP . LOGIN_URI . "/mError";
         }
 
+        print_r($_SESSION['login' . APP_ABREV]);exit;
 	    echo "<script>location.href='{$redirect}';</script>";
     }
 
     function check_session() {
-        print_r($_SESSION['login' . APP_ABREV]);exit;
         if($_SESSION['login' . APP_ABREV] !== true) {
             $this->checkout();
         }
