@@ -26,8 +26,8 @@ class UsuarioController {
     }
 
     function agregar() {
-    	SessionHandler()->check_session();
-    	SessionHandler()->checkPerfil('3,9');
+	SessionHandler()->check_session();
+    	//SessionHandler()->checkPerfil('3,9');
 		$usuario = $_SESSION["data-login-" . APP_ABREV]["usuario-denominacion"];
 		$nivel = $_SESSION["data-login-" . APP_ABREV]["usuario-nivel"];
 		$select_usuario = "u.usuario_id AS USUARIO_ID, u.denominacion AS DENOMINACION, CONCAT(ud.apellido, ' ', ud.nombre) AS USUARIO, 
@@ -52,7 +52,7 @@ class UsuarioController {
 
 	function guardar() {
 		SessionHandler()->check_session();
-		SessionHandler()->checkPerfil('3,9');
+		//SessionHandler()->checkPerfil('3,9');
 		$configuracionmenu_id = filter_input(INPUT_POST, "configuracionmenu");
 		$cmm = new ConfiguracionMenu();
 		$cmm->configuracionmenu_id = $configuracionmenu_id;
@@ -72,7 +72,7 @@ class UsuarioController {
 
 	function editar($arg) {
 		SessionHandler()->check_session();
-		SessionHandler()->checkPerfil('3,9');
+		//SessionHandler()->checkPerfil('3,9');
 		$this->model->usuario_id = $arg;
 		$this->model->get();
 		
@@ -99,7 +99,7 @@ class UsuarioController {
 
 	function actualizar() {
 		SessionHandler()->check_session();
-		SessionHandler()->checkPerfil('3,9');
+		//SessionHandler()->checkPerfil('3,9');
 		$configuracionmenu_id = filter_input(INPUT_POST, "configuracionmenu");
 		$cmm = new ConfiguracionMenu();
 		$cmm->configuracionmenu_id = $configuracionmenu_id;
@@ -138,7 +138,7 @@ class UsuarioController {
 
 	function eliminar($arg) {
 		SessionHandler()->check_session();
-		SessionHandler()->checkPerfil('3,9');
+		//SessionHandler()->checkPerfil('3,9');
 		$this->model->usuario_id = $arg;
 		$this->model->get();
 		$usuariodetalle_id = $this->model->usuariodetalle->usuariodetalle_id;
@@ -150,7 +150,7 @@ class UsuarioController {
 	
 	function regenerar_token($arg) {
 		SessionHandler()->check_session();
-		SessionHandler()->checkPerfil('3,9');
+		//SessionHandler()->checkPerfil('3,9');
 		$usuario_id = $arg;
 		$this->model->usuario_id = $usuario_id;
 		$this->model->get();
@@ -173,7 +173,7 @@ class UsuarioController {
 
 	function admin() {
 		SessionHandler()->check_session();
-		SessionHandler()->checkPerfil('3,9');
+		//SessionHandler()->checkPerfil('3,9');
 		$this->view->admin();
 	}
 
@@ -184,7 +184,7 @@ class UsuarioController {
 
 	function administrador() {
 		SessionHandler()->check_session();
-		SessionHandler()->checkPerfil('3,9');
+		//SessionHandler()->checkPerfil('3,9');
 		$perfil_id = $_SESSION["data-login-" . APP_ABREV]["usuario-nivel"];
 		$this->view->administrador();
 	}
@@ -196,7 +196,7 @@ class UsuarioController {
 
 	function informar_clave() {
 		SessionHandler()->check_session();
-		SessionHandler()->checkPerfil('3,9');
+		//SessionHandler()->checkPerfil('3,9');
 		$usuario_collection = Collector()->get("Usuario");
 		$usuario_temp = array();
 		foreach ($usuario_collection as $clave=>$valor) {
@@ -216,7 +216,7 @@ class UsuarioController {
 
 	function blanqueo_masivo() {
 		SessionHandler()->check_session();
-		SessionHandler()->checkPerfil('3,9');
+		//SessionHandler()->checkPerfil('3,9');
 		$select = 'u.usuario_id AS ID';
 		$from = 'usuario u';
 		$usuario_collection = CollectorCondition()->get("Usuario", NULL, 4, $from, $select);
