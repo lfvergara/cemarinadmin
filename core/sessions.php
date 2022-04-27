@@ -51,7 +51,7 @@ class SessionBaseHandler {
             $_SESSION['login' . APP_ABREV] = false;
             $redirect = URL_APP . LOGIN_URI . "/mError";
         }
-	
+print_r($_SESSION);exit;
 	    echo "<script>location.href='{$redirect}';</script>";
     }
 
