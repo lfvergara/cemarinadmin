@@ -12,7 +12,6 @@ class UniversidadFacultadController {
 
 	function panel() {
     	SessionHandler()->check_session();
-		//SessionHandler()->check_admin_level();
 		$universidadfacultad_collection = Collector()->get('UniversidadFacultad');
 		$this->view->panel($universidadfacultad_collection);
 	}
@@ -22,7 +21,8 @@ class UniversidadFacultadController {
 		//SessionHandler()->check_admin_level();		
 		foreach ($_POST as $key=>$value) $this->model->$key = $value;
         $this->model->save();
-		header("Location: " . URL_APP . "/universidadfacultad/panel");
+		$redirect = URL_APP . "/universidadfacultad/panel";
+		echo "<script>location.href='{$redirect}';</script>";
 	}
 
 	function editar($arg) {

@@ -27,7 +27,6 @@ class UsuarioController {
 
     function agregar() {
 	SessionHandler()->check_session();
-    	//SessionHandler()->checkPerfil('3,9');
 		$usuario = $_SESSION["data-login-" . APP_ABREV]["usuario-denominacion"];
 		$nivel = $_SESSION["data-login-" . APP_ABREV]["usuario-nivel"];
 		$select_usuario = "u.usuario_id AS USUARIO_ID, u.denominacion AS DENOMINACION, CONCAT(ud.apellido, ' ', ud.nombre) AS USUARIO, 
@@ -52,7 +51,6 @@ class UsuarioController {
 
 	function guardar() {
 		SessionHandler()->check_session();
-		//SessionHandler()->checkPerfil('3,9');
 		$configuracionmenu_id = filter_input(INPUT_POST, "configuracionmenu");
 		$cmm = new ConfiguracionMenu();
 		$cmm->configuracionmenu_id = $configuracionmenu_id;
@@ -67,12 +65,12 @@ class UsuarioController {
         $this->model->configuracionmenu = $configuracionmenu_id;
         $this->model->usuariodetalle = $detalle->model->usuariodetalle_id;        
         $this->model->save();
-		header("Location: " . URL_APP . "/usuario/agregar");
+		$redirect = URL_APP . "/usuario/agregar";
+		echo "<script>location.href='{$redirect}';</script>";
 	}
 
 	function editar($arg) {
 		SessionHandler()->check_session();
-		//SessionHandler()->checkPerfil('3,9');
 		$this->model->usuario_id = $arg;
 		$this->model->get();
 		
@@ -99,7 +97,6 @@ class UsuarioController {
 
 	function actualizar() {
 		SessionHandler()->check_session();
-		//SessionHandler()->checkPerfil('3,9');
 		$configuracionmenu_id = filter_input(INPUT_POST, "configuracionmenu");
 		$cmm = new ConfiguracionMenu();
 		$cmm->configuracionmenu_id = $configuracionmenu_id;
@@ -112,7 +109,8 @@ class UsuarioController {
         $this->model->nivel = $cmm->nivel;
         $this->model->configuracionmenu = $configuracionmenu_id;
 		$this->model->save();
-		header("Location: " . URL_APP . "/usuario/agregar");
+		$redirect = URL_APP . "/usuario/agregar";
+		echo "<script>location.href='{$redirect}';</script>";
 	}
 
 	function actualizar_token() {
@@ -124,7 +122,6 @@ class UsuarioController {
 		$udc = new UsuarioDetalleController();
         $udc->actualizar_token($usuariodetalle_id);
 
-
 		$this->model = new Usuario();
 		$this->model->usuario_id = $usuario_id;
 		$this->model->get();
@@ -132,25 +129,24 @@ class UsuarioController {
 		$this->model->save();
 
         $_SESSION["data-login-" . APP_ABREV]["usuario-actualiza_contrasena"] = 0;
-
-		header("Location: " . URL_APP . "/usuario/perfil");
+        $redirect = URL_APP . "/usuario/perfil";
+		echo "<script>location.href='{$redirect}';</script>";
 	}
 
 	function eliminar($arg) {
 		SessionHandler()->check_session();
-		//SessionHandler()->checkPerfil('3,9');
 		$this->model->usuario_id = $arg;
 		$this->model->get();
 		$usuariodetalle_id = $this->model->usuariodetalle->usuariodetalle_id;
 		$udc = new UsuarioDetalleController();
 		$udc->eliminar($usuariodetalle_id);
 		$this->model->delete();
-		header("Location: " . URL_APP . "/usuario/agregar");
+		$redirect = URL_APP . "/usuario/agregar";
+		echo "<script>location.href='{$redirect}';</script>";
 	}
 	
 	function regenerar_token($arg) {
 		SessionHandler()->check_session();
-		//SessionHandler()->checkPerfil('3,9');
 		$usuario_id = $arg;
 		$this->model->usuario_id = $usuario_id;
 		$this->model->get();
@@ -163,7 +159,8 @@ class UsuarioController {
 		$this->model->actualiza_contrasena = 1;
 		$this->model->save();
 
-		header("location:" . URL_APP . "/usuario/agregar");
+		$redirect = URL_APP . "/usuario/agregar";
+		echo "<script>location.href='{$redirect}';</script>";
 	}
 
 	function perfil() {
@@ -173,7 +170,6 @@ class UsuarioController {
 
 	function admin() {
 		SessionHandler()->check_session();
-		//SessionHandler()->checkPerfil('3,9');
 		$this->view->admin();
 	}
 
@@ -184,7 +180,6 @@ class UsuarioController {
 
 	function administrador() {
 		SessionHandler()->check_session();
-		//SessionHandler()->checkPerfil('3,9');
 		$perfil_id = $_SESSION["data-login-" . APP_ABREV]["usuario-nivel"];
 		$this->view->administrador();
 	}
@@ -196,7 +191,6 @@ class UsuarioController {
 
 	function informar_clave() {
 		SessionHandler()->check_session();
-		//SessionHandler()->checkPerfil('3,9');
 		$usuario_collection = Collector()->get("Usuario");
 		$usuario_temp = array();
 		foreach ($usuario_collection as $clave=>$valor) {
@@ -206,7 +200,6 @@ class UsuarioController {
 								"{usuario-contraseña}"=>$valor->denominacion . "$1",
 								"{usuario_correo}"=>$valor->usuariodetalle->correoelectronico);
 			$usuario_temp[] = $array_temp;
-			
 		}
 
 		$emailHelper = new EmailUsuario();
@@ -216,7 +209,6 @@ class UsuarioController {
 
 	function blanqueo_masivo() {
 		SessionHandler()->check_session();
-		//SessionHandler()->checkPerfil('3,9');
 		$select = 'u.usuario_id AS ID';
 		$from = 'usuario u';
 		$usuario_collection = CollectorCondition()->get("Usuario", NULL, 4, $from, $select);

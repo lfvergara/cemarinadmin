@@ -43,20 +43,16 @@ class SessionBaseHandler {
                         $redirect = URL_APP . "/usuario/perfil";
                         break;
                     default:
-                        // $redirect = URL_APP . "/reporte/panel";
                         $redirect = ($um->nivel < 3) ? URL_APP . "/usuario/perfil" : URL_APP . "/usuario/perfil";
-			//$redirect = "http://cemarinadmin.cemarin.org/usuario/perfil";
                         break;
                 }
             }
         } else {
             $_SESSION['login' . APP_ABREV] = false;
-	    //echo "<script>location.href='{$redirect}';</script>";
             $redirect = URL_APP . LOGIN_URI . "/mError";
         }
 	
-	echo "<script>location.href='{$redirect}';</script>";
-        //header("Location: $redirect");
+	    echo "<script>location.href='{$redirect}';</script>";
     }
 
     function check_session() {
@@ -88,7 +84,8 @@ class SessionBaseHandler {
         $level = $_SESSION["data-login-" . APP_ABREV]["usuario-nivel"];
         $temp_admin_id = array(3,9);
         if (!in_array($level, $temp_admin_id)) {
-            header("location:" . URL_APP . "/usuario/perfil");
+            $redirect = URL_APP . "/usuario/perfil";
+            echo "<script>location.href='{$redirect}';</script>";
         }
     }
 
@@ -113,8 +110,8 @@ class SessionBaseHandler {
 	
         session_destroy();
         $_SESSION['login' . APP_ABREV] = false;
-	print_r(URL_APP . LOGIN_URI);exit;
-        header("Location: " . URL_APP . LOGIN_URI);
+	    $redirect = URL_APP . LOGIN_URI;
+        echo "<script>location.href='{$redirect}';</script>";
     }
 }
 

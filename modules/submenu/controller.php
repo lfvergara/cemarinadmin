@@ -15,8 +15,6 @@ class SubMenuController {
 
 	function editar($arg) {
 		SessionHandler()->check_session();
-		//SessionHandler()->check_admin_level();
-
 		$this->model->submenu_id = $arg;
 		$this->model->get();
 		$menu_collection = Collector()->get('Menu');
@@ -27,20 +25,18 @@ class SubMenuController {
 
 	function guardar() {
 		SessionHandler()->check_session();
-		//SessionHandler()->check_admin_level();
-		
 		foreach ($_POST as $clave=>$valor) $this->model->$clave = $valor;
 		$this->model->save();
-		header("Location: " . URL_APP . "/menu/agregar");
+		$redirect = URL_APP . "/menu/agregar";
+		echo "<script>location.href='{$redirect}';</script>";
 	}
 
 	function eliminar($arg) {
 		SessionHandler()->check_session();
-		//SessionHandler()->check_admin_level();
-
 		$this->model->submenu_id = $arg;
 		$this->model->delete();
-		header("Location: " . URL_APP . "/menu/agregar");	
+		$redirect = URL_APP . "/menu/agregar";
+		echo "<script>location.href='{$redirect}';</script>";
 	}
 }
 ?>

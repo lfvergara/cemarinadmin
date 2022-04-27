@@ -22,7 +22,7 @@ class UniversidadAreaController {
 		//SessionHandler()->check_admin_level();		
 		foreach ($_POST as $key=>$value) $this->model->$key = $value;
         $this->model->save();
-		header("Location: " . URL_APP . "/universidadarea/panel");
+		$redirect = URL_APP . "/universidadarea/panel";
 	}
 
 	function editar($arg) {

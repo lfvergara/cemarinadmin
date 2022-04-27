@@ -19,14 +19,12 @@ class InvestigadorController {
 
 	function panel() {
     	SessionHandler()->check_session();
-		//SessionHandler()->check_admin_level();
 		$investigador_collection = Collector()->get('Investigador');
 		$this->view->panel($investigador_collection);
 	}
 
 	function agregar() {
     	SessionHandler()->check_session();
-		//SessionHandler()->check_admin_level();
 		$investigadorcategoria_collection = Collector()->get('InvestigadorCategoria');
 		$lineainvestigacion_collection = Collector()->get('LineaInvestigacion');
 		$universidad_collection = Collector()->get('Universidad');
@@ -35,7 +33,6 @@ class InvestigadorController {
 
 	function guardar() {
 		SessionHandler()->check_session();
-		//SessionHandler()->check_admin_level();
 		$this->model->fecha = date('Y-m-d');
 		$this->model->nombre = filter_input(INPUT_POST, 'nombre');
 		$this->model->ciudad_residencia = 'N/A';
@@ -55,12 +52,12 @@ class InvestigadorController {
 		$this->model->universidadfacultad = 51;
 		$this->model->universidadarea = 11;
         $this->model->save();
-		header("Location: " . URL_APP . "/investigadorcategoria/panel");
+        $redirect = URL_APP . "/investigadorcategoria/panel";
+        echo "<script>location.href='{$redirect}';</script>";
 	}
 
 	function editar($arg) {
 		SessionHandler()->check_session();
-		//SessionHandler()->check_admin_level();
 		$this->model->investigador_id = $arg;
 		$this->model->get();
 		$investigadorcategoria_collection = Collector()->get('InvestigadorCategoria');
@@ -71,7 +68,6 @@ class InvestigadorController {
 
 	function actualizar() {
 		SessionHandler()->check_session();
-		//SessionHandler()->check_admin_level();
 		$investigador_id = filter_input(INPUT_POST, "investigador_id");
 		$this->model->investigador_id = $investigador_id;
 		$this->model->get();
@@ -81,7 +77,8 @@ class InvestigadorController {
 		$this->model->lineainvestigacion = filter_input(INPUT_POST, 'lineainvestigacion');
 		$this->model->universidad = filter_input(INPUT_POST, 'universidad');
 		$this->model->save();
-		header("Location: " . URL_APP . "/investigador/panel");
+		$redirect = URL_APP . "/investigador/panel";
+		echo "<script>location.href='{$redirect}';</script>";
 	}
 
 	function buscar() {

@@ -22,7 +22,8 @@ class GrupoInvestigacionController {
 		//SessionHandler()->check_admin_level();		
 		foreach ($_POST as $key=>$value) $this->model->$key = $value;
         $this->model->save();
-		header("Location: " . URL_APP . "/grupoinvestigacion/panel");
+        $redirect = URL_APP . "/grupoinvestigacion/panel";
+        echo "<script>location.href='{$redirect}';</script>";
 	}
 
 	function editar($arg) {

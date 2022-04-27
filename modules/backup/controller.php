@@ -37,7 +37,8 @@ class BackupController {
 				 
 		$target = URL_PRIVATE . "backup/bd/";
 		shell_exec("mysqldump --skip-comments --routines -h '{$dbhost}' -u '{$dbuser}' -p'{$dbpass}' '{$dbname}' | gzip -c > {$target}/{$denominacion}.sql.gz"); 
-		header("Location: " . URL_APP . "/backup/panel");
+		$redirect = URL_APP . "/backup/panel";
+		echo "<script>location.href='{$redirect}';</script>";
 	}
 
 	function eliminar($arg) {
@@ -48,7 +49,8 @@ class BackupController {
 		$target = URL_PRIVATE . "backup/bd/{$denominacion}.sql.gz";
 		unlink($target);
 		$this->model->delete();
-		header("Location: " . URL_APP . "/backup/panel");
+		$redirect = URL_APP . "/backup/panel";
+		echo "<script>location.href='{$redirect}';</script>";
 	}
 }
 ?>

@@ -12,22 +12,20 @@ class LineaInvestigacionController {
 
 	function panel() {
     	SessionHandler()->check_session();
-		//SessionHandler()->check_admin_level();
 		$lineainvestigacion_collection = Collector()->get('LineaInvestigacion');
 		$this->view->panel($lineainvestigacion_collection);
 	}
 
 	function guardar() {
 		SessionHandler()->check_session();
-		//SessionHandler()->check_admin_level();		
 		foreach ($_POST as $key=>$value) $this->model->$key = $value;
         $this->model->save();
-		header("Location: " . URL_APP . "/lineainvestigacion/panel");
+        $redirect = URL_APP . "/lineainvestigacion/panel";
+        echo "<script>location.href='{$redirect}';</script>";
 	}
 
 	function editar($arg) {
 		SessionHandler()->check_session();
-		//SessionHandler()->check_admin_level();
 		$this->model->lineainvestigacion_id = $arg;
 		$this->model->get();
 		$lineainvestigacion_collection = Collector()->get('LineaInvestigacion');

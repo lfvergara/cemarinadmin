@@ -12,22 +12,20 @@ class UniversidadController {
 
 	function panel() {
     	SessionHandler()->check_session();
-		//SessionHandler()->check_admin_level();
 		$universidad_collection = Collector()->get('Universidad');
 		$this->view->panel($universidad_collection);
 	}
 
 	function guardar() {
 		SessionHandler()->check_session();
-		//SessionHandler()->check_admin_level();		
 		foreach ($_POST as $key=>$value) $this->model->$key = $value;
         $this->model->save();
-		header("Location: " . URL_APP . "/universidad/panel");
+        $redirect = URL_APP . "/universidad/panel";
+        echo "<script>location.href='{$redirect}';</script>";
 	}
 
 	function editar($arg) {
 		SessionHandler()->check_session();
-		//SessionHandler()->check_admin_level();
 		$this->model->universidad_id = $arg;
 		$this->model->get();
 		$universidad_collection = Collector()->get('Universidad');

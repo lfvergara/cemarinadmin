@@ -25,7 +25,8 @@ class ConfiguracionMenuController {
 		$this->model->nivel = filter_input(INPUT_POST, "nivel");
 		$this->model->save();
 		$arg = $this->model->configuracionmenu_id;
-		header("Location: " . URL_APP . "/configuracionmenu/configuracion/{$arg}");
+		$redirect = URL_APP . "/configuracionmenu/configuracion/{$arg}";
+		echo "<script>location.href='{$redirect}';</script>";
 	}
 
 	function configuracion($arg) {
@@ -68,7 +69,8 @@ class ConfiguracionMenuController {
             $icmm->save();
 		}
 
-		header("Location: " . URL_APP . "/configuracionmenu/configuracion/{$configuracionmenu_id}");		
+		$redirect = URL_APP . "/configuracionmenu/configuracion/{$configuracionmenu_id}";
+		echo "<script>location.href='{$redirect}';</script>";
 	}
 
 	function quitar_submenu($arg) {
@@ -86,7 +88,8 @@ class ConfiguracionMenuController {
 		$this->model->submenu_collection = $submenu_collection;
 		$smcmm = new SubMenuConfiguracionMenu($this->model);
 		$smcmm->save();
-		header("Location: " . URL_APP . "/configuracionmenu/configuracion/{$configuracionmenu_id}");		
+		$redirect = URL_APP . "/configuracionmenu/configuracion/{$configuracionmenu_id}";
+		echo "<script>location.href='{$redirect}';</script>";
 	}
 
 
@@ -102,7 +105,8 @@ class ConfiguracionMenuController {
 		$this->model->item_collection = $item_collection;
 		$icmm = new ItemConfiguracionMenu($this->model);
 		$icmm->save();
-		header("Location: " . URL_APP . "/configuracionmenu/configuracion/{$configuracionmenu_id}");		
+		$redirect = URL_APP . "/configuracionmenu/configuracion/{$configuracionmenu_id}";
+		echo "<script>location.href='{$redirect}';</script>";
 	}
 
 	function ajax_traer_tercer_nivel($arg) {

@@ -14,15 +14,13 @@ class MenuController {
 	}
 
 	function panel() {
-		SessionHandler()->check_session();
-		
+		SessionHandler()->check_session();		
 		$configuracionmenu_collection = Collector()->get('ConfiguracionMenu');	
 		$this->view->panel($configuracionmenu_collection);
 	}
 
 	function agregar() {
-		SessionHandler()->check_session();
-		
+		SessionHandler()->check_session();		
 		$menu_collection = Collector()->get('Menu');
 		$submenu_collection = Collector()->get('SubMenu');
 		$item_collection = Collector()->get('Item');
@@ -30,8 +28,7 @@ class MenuController {
 	}
 
 	function editar($arg) {
-		SessionHandler()->check_session();		
-
+		SessionHandler()->check_session();
 		$this->model->menu_id = $arg;
 		$this->model->get();
 		$menu_collection = Collector()->get('Menu');
@@ -41,20 +38,19 @@ class MenuController {
 	}
 
 	function guardar() {
-		SessionHandler()->check_session();
-		
+		SessionHandler()->check_session();		
 		foreach ($_POST as $clave=>$valor) $this->model->$clave = $valor;
 		$this->model->save();
-		header("Location: " . URL_APP . "/menu/agregar");
+		$redirect = URL_APP . "/menu/agregar");
+		echo "<script>location.href='{$redirect}';</script>";
 	}
 
 	function eliminar($arg) {
-		SessionHandler()->check_session();
-		
+		SessionHandler()->check_session();		
 		$this->model->menu_id = $arg;
 		$this->model->delete();
-		header("Location: " . URL_APP . "/menu/agregar");
+		$redirect = URL_APP . "/menu/agregar");
+		echo "<script>location.href='{$redirect}';</script>";
 	}
-
 }
 ?>
